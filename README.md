@@ -1,16 +1,19 @@
-## Hi there 👋
+import pandas as pd
 
-<!--
-**asha-2006/ASHA-2006** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+import numpy as np
 
-Here are some ideas to get you started:
+importances = rf_model.feature_importances_
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+feature_names = vectorizer.get_feature_names_out()
+
+indices = np.argsort(importances)[-15:]
+
+plt.barh(range(len(indices)), importances[indices], align='center')
+
+plt.yticks(range(len(indices)), [feature_names[i] for i in indices])
+
+plt.xlabel('Relative Importance')
+
+plt.title('Top 15 Important Features (Words)')
+
+plt.show()
